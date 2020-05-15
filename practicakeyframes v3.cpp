@@ -54,13 +54,17 @@ float movOffset;
 float reproduciranimacion, habilitaranimacion, guardoFrame, reinicioFrame, ciclo, ciclo2, contador = 0;
 float rot; // para animacion de arboles
 float movPerro;
-
+int segundos = 0;
+bool isDay;
 //float rotapato;
 bool avanza;// , patoadelante;
 Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 Camera camera;
+
+GLuint uniformColor = 0;
+
 
 //Variables de texturizado
 Texture brickTexture;
@@ -77,6 +81,8 @@ Texture Tarbol3;
 Texture Tnaranja;
 Texture Trosa;
 Texture Tcafe;
+Texture TlegoGreen;
+Texture Ttransparente;
 
 
 //materiales
@@ -113,6 +119,32 @@ static const char* vShader = "shaders/shader_light.vert";
 // Fragment Shader
 static const char* fShader = "shaders/shader_light.frag";
 //cálculo del promedio de las normales para sombreado de Phong 
+double getSunIntensity(int hours) {
+
+	//sacamos la hora del dia asumiendo que cada 24 segundos es un día
+	double actualHour = hours % 24;
+	//printf("Actual hour: %f\n", actualHour);
+	//Lo limitamos al intervalo -0.5:0.5 para aplicar la distribución normal y el valor máximo sea 1
+	double x = actualHour / 24 - 0.5;
+	//printf("x: %.2f\n", x);
+	int m = 0;
+	double s = 0.4;
+	static const float inv_sqrt_2pi = 0.3989422804014327;
+	float a = (x - m) / s;
+
+	return inv_sqrt_2pi / s * std::exp(-2 * a * a);
+}
+
+int getPublicLightsStatus() {
+	double horaActual = segundos % 24;
+	printf("HORA ACTUAL: %.2f\n", horaActual);
+
+	if (horaActual < 6 or horaActual>19)
+		return 1;
+	else
+		return 0;
+}
+
 void calcAverageNormals(unsigned int * indices, unsigned int indiceCount, GLfloat * vertices, unsigned int verticeCount, 
 						unsigned int vLength, unsigned int normalOffset)
 {
@@ -286,6 +318,24 @@ void CrearCubo()
 
 }
 
+void CreateObject2()
+{
+	unsigned int indices[] = {
+		0,3,1,
+		1,3,2,
+		2,3,0,
+		0,1,2
+	};
+	GLfloat vertices[] = {
+		-0.5f, -0.5f,0.5f,
+		0.0f,-0.5f,0.5f,
+		0.5f,-0.5f, 0.0f,
+		0.0f,0.5f,0.0f
+	};
+	Mesh* obj1 = new Mesh();
+	obj1->CreateMesh(vertices, indices, 12, 12);
+	meshList.push_back(obj1);
+}
 
 
 void CreateShaders()
@@ -399,6 +449,8 @@ int main()
 
 	CreateObjects();
 	CrearCubo();
+	CreateObject2();
+
 	CreateShaders();
 
 	camera = Camera(glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 0.5f);
@@ -435,6 +487,8 @@ int main()
 	Tarbol1.LoadTextureA();
 	Tarbol2 = Texture("Textures/proyecto/lego_three4.tga");
 	Tarbol2.LoadTextureA();
+	TlegoGreen = Texture("Textures/proyecto/lego green.tga");
+	TlegoGreen.LoadTextureA();
 	Tarbol3 = Texture("Textures/proyecto/lego_arbolito.tga");
 	Tarbol3.LoadTextureA();
 	Tnaranja = Texture("Textures/proyecto/naranja.png");
@@ -443,7 +497,8 @@ int main()
 	Trosa.LoadTextureA();
 	Tcafe = Texture("Textures/proyecto/cafe.jpg");
 	Tcafe.LoadTextureA();
-
+	Ttransparente = Texture("Textures/proyecto/transparente.tga");
+	Ttransparente.LoadTextureA();
 
 
 
@@ -465,9 +520,13 @@ int main()
 	Camino_M.LoadModel("Models/railroad track.obj");
 
 
+	bool isDay = false;
 	//luz direccional, sólo 1 y siempre debe de existir
+	printf("\nIntensidad del sol: %.2f\n", getSunIntensity(segundos));
+
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f, 
-								0.3f, 0.3f,
+								//1.0f, 1.0f,
+								getSunIntensity(segundos),getSunIntensity(segundos),
 								0.0f, 100.0f, -1.0f);
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
@@ -498,7 +557,7 @@ int main()
 	spotLightCount++;
 	//luz de faro
 	spotLights[2] = SpotLight(1.0f, 1.0f, 0.0f,
-		0.0f, 1.0f,
+		1.0f*getPublicLightsStatus(), 1.0f*getPublicLightsStatus(),
 		0.0f, 0.0f, 0.0f,
 		0.0f, -20.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
@@ -514,7 +573,7 @@ int main()
 	spotLightCount++;
 	//luz de faro 2
 	spotLights[4] = SpotLight(0.0f, 0.0f, 1.0f,
-		0.0f, 1.0f,
+		0.0f*getPublicLightsStatus(), 1.0f* getPublicLightsStatus(),
 		0.0f, 0.0f, 0.0f,
 		0.0f, -20.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
@@ -637,15 +696,18 @@ int main()
 
 	//Agregar Kefyrame[5] para que el avión regrese al inicio */
 
-
-	
+	double startTime,endTime;
+	startTime = glfwGetTime();
 	//Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
 		GLfloat now = glfwGetTime();
 		deltaTime = now - lastTime; 
-		//deltaTime += (now - lastTime) / limitFPS;
 		lastTime = now;
+		//printf("lastTime: %f\n", &lastTime);
+
+
+
 		if (avanza)
 		{
 			if (movPerro < 10.0f)
@@ -690,6 +752,7 @@ int main()
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
 		uniformView = shaderList[0].GetViewLocation();
+		uniformColor = shaderList[0].getColorLocation();
 		uniformEyePosition = shaderList[0].GetEyePositionLocation();
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
@@ -715,12 +778,13 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 0.5f,2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glEnable(GL_BLEND);
-		pisoTexture.UseTexture();
+		TlegoGreen.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
 		glDisable(GL_BLEND);
 
 		//---- pasillos
+			
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(0.0f, 0.01f, 4.0f));
 			model = glm::scale(model, glm::vec3(2.0f, 0.05f, 0.097f));
@@ -805,7 +869,7 @@ int main()
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glEnable(GL_BLEND);
-		Tladrillo.UseTexture();
+		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
@@ -817,7 +881,7 @@ int main()
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glEnable(GL_BLEND);
-		Tladrillo.UseTexture();
+		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
@@ -829,7 +893,7 @@ int main()
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glEnable(GL_BLEND);
-		Tladrillo.UseTexture();
+		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
@@ -841,7 +905,7 @@ int main()
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glEnable(GL_BLEND);
-		Tladrillo.UseTexture();
+		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
@@ -853,7 +917,7 @@ int main()
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glEnable(GL_BLEND);
-		Tladrillo.UseTexture();
+		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
@@ -884,14 +948,21 @@ int main()
 
 	//---------Kiosko
 			//Escaleras
+		   glm::vec3 color = glm::vec3(1.0f, 0.0f, 0.0f);
+			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(10.0f, 0.1f, 0.0f));
 			model = glm::scale(model, glm::vec3(0.2f, 0.2f, 2.0f));
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			glEnable(GL_BLEND);
-			Tpasillo.UseTexture();
+			//glEnable(GL_BLEND);
+			Ttransparente.UseTexture();
+
+			color = glm::vec3(1.0f, 1.0f, 0.0f);
+			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			meshList[4]->RenderMesh();//1er escalón
+			color = glm::vec3(1.0f, 0.0f, 1.0f);
+			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			meshList[4]->RenderMesh();//2do escolón
@@ -1979,13 +2050,46 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		*/
-			glUseProgram(0);
+
+
+		endTime = glfwGetTime();
+		double resultado = endTime - startTime;
+		//printf("end - start: %.2f-%.2f: %.2f\n", endTime,startTime,resultado);
+		if ((endTime - startTime) >= 1) {
+			printf("Segundos: %d\n",segundos);
+			segundos++;
+			startTime = endTime;
+			//Se vuelve a renderizar la luz del sol cada segundo
+			printf("\nIntensidad del sol: %.2f\n", getSunIntensity(segundos));
+			printf("Luces prendidas?: %d\n", getPublicLightsStatus());
+			mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
+				//1.0f, 1.0f,
+				getSunIntensity(segundos), getSunIntensity(segundos),
+				0.0f, 100.0f, -1.0f);
+			spotLights[2] = SpotLight(1.0f, 1.0f, 0.0f,
+				1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+				0.0f, 0.0f, 0.0f,
+				0.0f, -20.0f, 0.0f,
+				1.0f, 0.0f, 0.0f,
+				100.0f);
+			//luz de faro 2
+			spotLights[4] = SpotLight(0.0f, 0.0f, 1.0f,
+				1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+				0.0f, 0.0f, 0.0f,
+				0.0f, -20.0f, 0.0f,
+				1.0f, 0.0f, 0.0f,
+				100.0f);
+		}
+		glUseProgram(0);
 
 		mainWindow.swapBuffers();
+
 	}
 	//engine->drop(); // delete engine
 	return 0;
 }
+
+
 
 void inputkey(bool* keys) 
 {

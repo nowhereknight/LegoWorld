@@ -167,6 +167,10 @@ GLuint Shader::GetViewLocation()
 {
 	return uniformView;
 }
+GLuint Shader::getColorLocation()
+{
+	return uniformColor;
+}
 GLuint Shader::GetAmbientcolorLocation()
 {
 	return uniformDirectionalLight.uniformcolor;
