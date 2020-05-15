@@ -114,6 +114,7 @@ Sphere cabeza = Sphere(0.5, 20, 20);
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
 static double limitFPS = 1.0 / 60.0;//
+int lightsOn = 1;
 
 //void my_input(GLFWwindow *window);
 //void inputKeyframes(bool* keys);
@@ -125,6 +126,13 @@ static const char* vShader = "shaders/shader_light.vert";
 // Fragment Shader
 static const char* fShader = "shaders/shader_light.frag";
 //cálculo del promedio de las normales para sombreado de Phong 
+
+double getLocVariation(int frames) {
+	//120 va a ser 2Pi <=>360°
+	double t = (frames *360) / 120;
+
+	return sin(t*toRadians);
+}
 double getSunIntensity(int hours) {
 
 	//sacamos la hora del dia asumiendo que cada 24 segundos es un día
@@ -143,7 +151,6 @@ double getSunIntensity(int hours) {
 
 int getPublicLightsStatus() {
 	double horaActual = segundos % 24;
-	printf("HORA ACTUAL: %.2f\n", horaActual);
 
 	if (horaActual < 8 or horaActual>18)
 		return 1;
@@ -688,6 +695,8 @@ int main()
 	double startTime,endTime;
 	startTime = glfwGetTime();
 	//Loop mientras no se cierra la ventana
+	int frames;
+	frames = 0;
 	while (!mainWindow.getShouldClose())
 	{
 		GLfloat now = glfwGetTime();
@@ -697,7 +706,7 @@ int main()
 
 		spotLightCount = 6;
 
-
+		printf("frames: %d sin(x): %.2f\n", frames,getLocVariation(frames));
 		if (avanza)
 		{
 			if (movPerro < 10.0f)
@@ -2164,46 +2173,47 @@ int main()
 			2.0f, 1.5f, -3.0f,
 			0.3f, 0.2f, 0.1f);
 
-		spotLights[0] = SpotLight(1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 0.0f * getPublicLightsStatus(),
+		spotLights[0] = SpotLight(1.0f * getPublicLightsStatus()* lightsOn, 1.0f * getPublicLightsStatus()* lightsOn, 0.0f * getPublicLightsStatus()* lightsOn,
 			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
 			12.0f, 5.0f, 1.5f,
-			0.0f, -1.0f, 0.0f,
+			-1.0f * getLocVariation(frames), -1.0f, 0.0f,
 			1.0f, 0.0f, 0.0f,
 			20.0f);
 
-		spotLights[1] = SpotLight(0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+		spotLights[1] = SpotLight(0.0f * getPublicLightsStatus()* lightsOn, 1.0f * getPublicLightsStatus()* lightsOn, 1.0f * getPublicLightsStatus()* lightsOn,
 			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
 			12.0f, 5.0f, -1.5f,
-			0.0f, -1.0f, 0.0f,
+			-1.0f * getLocVariation(frames), -1.0f, 0.0f,
 			1.0f, 0.0f, 0.0f,
 			20.0f);
-		spotLights[2] = SpotLight(1.0f * getPublicLightsStatus(), 0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+		spotLights[2] = SpotLight(1.0f * getPublicLightsStatus()* lightsOn, 0.0f * getPublicLightsStatus()* lightsOn, 1.0f * getPublicLightsStatus()* lightsOn,
 			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-			15.0f, 5.0f, 1.5f,
-			0.0f, -1.0f, 0.0f,
+			16.0f, 5.0f, 3.0f,
+			-1.0f * getLocVariation(frames), -1.0f, 1.0f*getLocVariation(frames),
 			1.0f, 0.0f, 0.0f,
 			20.0f);
 
-		spotLights[3] = SpotLight(0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 0.0f * getPublicLightsStatus(),
+		spotLights[3] = SpotLight(0.0f * getPublicLightsStatus()* lightsOn, 1.0f * getPublicLightsStatus()* lightsOn, 0.0f * getPublicLightsStatus()* lightsOn,
 			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-			15.0f, 5.0f, -1.5f,
-			0.0f, -1.0f, 0.0f,
+			16.0f, 5.0f, -3.0f,
+			-1.0f * getLocVariation(frames), -1.0f, -1.0f*getLocVariation(frames),
 			1.0f, 0.0f, 0.0f,
 			20.0f);
-		spotLights[4] = SpotLight(1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 0.5f * getPublicLightsStatus(),
+		spotLights[4] = SpotLight(1.0f * getPublicLightsStatus()* lightsOn, 1.0f * getPublicLightsStatus()* lightsOn, 0.5f * getPublicLightsStatus()* lightsOn,
 			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-			18.0f, 5.0f, 1.5f,
-			0.0f, -1.0f, 0.0f,
-			1.0f, 0.0f, 0.0f,
-			20.0f);
-
-		spotLights[5] = SpotLight(0.5f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-			18.0f, 5.0f, -1.5f,
-			0.0f, -1.0f, 0.0f,
+			20.0f, 5.0f, 1.5f,
+			1.0f*getLocVariation(frames), -1.0f, 0.0f,
 			1.0f, 0.0f, 0.0f,
 			20.0f);
 
+		spotLights[5] = SpotLight(0.5f * getPublicLightsStatus()*lightsOn, 1.0f * getPublicLightsStatus()*lightsOn, 1.0f * getPublicLightsStatus()*lightsOn,
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			20.0f, 5.0f, -1.5f,
+			1.0f * getLocVariation(frames), -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+
+		frames++;
 		endTime = glfwGetTime();
 		double resultado = endTime - startTime;
 		//printf("end - start: %.2f-%.2f: %.2f\n", endTime,startTime,resultado);
@@ -2214,6 +2224,8 @@ int main()
 			//Se vuelve a renderizar la luz del sol cada segundo
 			printf("\nIntensidad del sol: %.2f\n", getSunIntensity(segundos));
 			printf("Luces prendidas?: %d\n", getPublicLightsStatus());
+			printf("Frames por segundo: %d\n\n", frames);
+			frames = 0;
 
 		}
 		glUseProgram(0);
@@ -2240,6 +2252,13 @@ void inputkey(bool* keys)
 	if (keys[GLFW_KEY_K])
 	{
 		camera = Camera(glm::vec3(0.0, 9.0, 0.0), glm::vec3(0.0f, 2.0f, 0.0f), 90.0f, 0.0f, 10.0f, 1.0f);
+	}
+	if (keys[GLFW_KEY_O])
+	{
+		if (lightsOn == 1)
+			lightsOn = 0;
+		else
+			lightsOn = 1;
 	}
 }
 /*
