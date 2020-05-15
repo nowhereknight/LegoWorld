@@ -23,6 +23,7 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	if (keys[GLFW_KEY_W])
 	{
 		position += front * velocity;
+
 	}
 
 	if (keys[GLFW_KEY_S])
@@ -33,13 +34,16 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	if (keys[GLFW_KEY_A])
 	{
 		position -= right * velocity;
+
 	}
 
 	if (keys[GLFW_KEY_D])
 	{
 		position += right * velocity;
 	}
+
 }
+
 
 void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 {
@@ -49,9 +53,9 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 	yaw += xChange;
 	pitch += yChange;
 
-	if (pitch > 89.0f)
+	if (pitch > 0.0f)
 	{
-		pitch = 89.0f;
+		pitch = 0.0f;
 	}
 
 	if (pitch < -89.0f)
@@ -61,6 +65,7 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 
 	update();
 }
+
 
 glm::mat4 Camera::calculateViewMatrix()
 {

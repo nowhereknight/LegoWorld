@@ -37,6 +37,7 @@ Animación por keyframes
 #include"SpotLight.h"
 
 #include <irrKlang.h>
+#include "Sonido.h"
 //#if defined(WIN32)
 //#include <conio.h>
 //#else
@@ -54,6 +55,7 @@ float movOffset;
 float reproduciranimacion, habilitaranimacion, guardoFrame, reinicioFrame, ciclo, ciclo2, contador = 0;
 float rot; // para animacion de arboles
 float movPerro;
+glm::vec3 positionP;
 int segundos = 0;
 bool isDay;
 //float rotapato;
@@ -81,8 +83,12 @@ Texture Tarbol3;
 Texture Tnaranja;
 Texture Trosa;
 Texture Tcafe;
+Texture Tazul;
+Texture Tnegro;
+Texture Tverde;
 Texture TlegoGreen;
 Texture Ttransparente;
+Texture Tamarillo;
 
 
 //materiales
@@ -139,7 +145,7 @@ int getPublicLightsStatus() {
 	double horaActual = segundos % 24;
 	printf("HORA ACTUAL: %.2f\n", horaActual);
 
-	if (horaActual < 6 or horaActual>19)
+	if (horaActual < 8 or horaActual>18)
 		return 1;
 	else
 		return 0;
@@ -318,25 +324,6 @@ void CrearCubo()
 
 }
 
-void CreateObject2()
-{
-	unsigned int indices[] = {
-		0,3,1,
-		1,3,2,
-		2,3,0,
-		0,1,2
-	};
-	GLfloat vertices[] = {
-		-0.5f, -0.5f,0.5f,
-		0.0f,-0.5f,0.5f,
-		0.5f,-0.5f, 0.0f,
-		0.0f,0.5f,0.0f
-	};
-	Mesh* obj1 = new Mesh();
-	obj1->CreateMesh(vertices, indices, 12, 12);
-	meshList.push_back(obj1);
-}
-
 
 void CreateShaders()
 {
@@ -449,11 +436,10 @@ int main()
 
 	CreateObjects();
 	CrearCubo();
-	CreateObject2();
 
 	CreateShaders();
-
-	camera = Camera(glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 0.5f);
+	Sonido musica = Sonido();
+	//musica.Reproduce();
 	/*
 	ISoundEngine* engine = createIrrKlangDevice();
 
@@ -495,10 +481,20 @@ int main()
 	Tnaranja.LoadTextureA();
 	Trosa = Texture("Textures/proyecto/rosa.png");
 	Trosa.LoadTextureA();
+	Tverde = Texture("Textures/proyecto/verde.jpg");
+	Tverde.LoadTextureA();
+	Tnegro = Texture("Textures/proyecto/negro.png");
+	Tnegro.LoadTextureA();
+	Tazul = Texture("Textures/proyecto/azul.jpg");
+	Tazul.LoadTextureA();
+	Trosa = Texture("Textures/proyecto/rosa.png");
+	Trosa.LoadTextureA();
 	Tcafe = Texture("Textures/proyecto/cafe.jpg");
 	Tcafe.LoadTextureA();
 	Ttransparente = Texture("Textures/proyecto/transparente.tga");
 	Ttransparente.LoadTextureA();
+	Tamarillo = Texture("Textures/proyecto/amarillo.jpg");
+	Tamarillo.LoadTextureA();
 
 
 
@@ -530,51 +526,41 @@ int main()
 								0.0f, 100.0f, -1.0f);
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
-	//Declaración de primer luz puntual //Rojo
-	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,
-								0.0f, 1.0f,
-								2.0f, 1.5f,1.5f,
+	pointLights[0] = PointLight(1.0f, 1.0f, 1.0f,
+								0.0f*getPublicLightsStatus(), 1.0f*getPublicLightsStatus(),
+								2.0f, 1.5f,3.0f,
 								0.3f, 0.2f, 0.1f);
 	pointLightCount++;
 	
+	pointLights[1] = PointLight(1.0f, 1.0f, 1.0f,
+		0.0f*getPublicLightsStatus(), 1.0f*getPublicLightsStatus(),
+		2.0f, 1.5f, -3.0f,
+		0.3f, 0.2f, 0.1f);
+	pointLightCount++;
 	unsigned int spotLightCount = 0;
-	//linterna
-	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
-		0.0f, 2.0f,
-		0.0f, 0.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		20.0f);
-	spotLightCount++;
 
-	//luz fija
-	spotLights[1] = SpotLight(0.0f, 0.0f, 1.0f,
-		0.0f, 2.0f,
-		10.0f, 0.0f, 0.0f,
-		0.0f, -5.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		10.0f);
-	spotLightCount++;
-	//luz de faro
-	spotLights[2] = SpotLight(1.0f, 1.0f, 0.0f,
+
+
+	//luz de kiosko
+	spotLights[0] = SpotLight(1.0f, 0.0f, 0.0f,
 		1.0f*getPublicLightsStatus(), 1.0f*getPublicLightsStatus(),
-		0.0f, 0.0f, 0.0f,
+		10.0f, 0.0f, -1.0f,
 		0.0f, -20.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		100.0f);
 	spotLightCount++;
-	//luz de helicoptero
-	spotLights[3] = SpotLight(0.0f, 0.0f, 1.0f,
-		0.0f, 1.0f,
+	//luz de kiosko2
+	/*spotLights[3] = SpotLight(0.0f, 0.0f, 1.0f,
+		0.0f*getPublicLightsStatus(), 1.0f*getPublicLightsStatus(),
 		2.0 - movCoche, 2.0f, 0.0f,
 		0.0f, -5.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		0.0f);
-	spotLightCount++;
-	//luz de faro 2
-	spotLights[4] = SpotLight(0.0f, 0.0f, 1.0f,
-		0.0f*getPublicLightsStatus(), 1.0f* getPublicLightsStatus(),
-		0.0f, 0.0f, 0.0f,
+	spotLightCount++;*/
+	//luz de kisko 3
+	spotLights[1] = SpotLight(0.0f, 1.0f, 1.0f,
+		1.0f*getPublicLightsStatus(), 1.0f* getPublicLightsStatus(),
+		10.0f, 0.0f, 1.0f,
 		0.0f, -20.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		100.0f);
@@ -695,6 +681,9 @@ int main()
 	KeyFrame[18].giroAvion = 0;
 
 	//Agregar Kefyrame[5] para que el avión regrese al inicio */
+	positionP = glm::vec3(camera.getCameraPosition().x + 2.5, camera.getCameraPosition().y + 1.3, camera.getCameraPosition().z);
+	camera = Camera(glm::vec3(positionP), glm::vec3(0.0f, 2.0f, 0.0f), 0.0f, 0.0f, 5.0f, 0.0f);
+
 
 	double startTime,endTime;
 	startTime = glfwGetTime();
@@ -706,6 +695,7 @@ int main()
 		lastTime = now;
 		//printf("lastTime: %f\n", &lastTime);
 
+		spotLightCount = 6;
 
 
 		if (avanza)
@@ -762,7 +752,7 @@ int main()
 		//spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 
 		shaderList[0].SetDirectionalLight(&mainLight);
-		//shaderList[0].SetPointLights(pointLights, pointLightCount);
+		shaderList[0].SetPointLights(pointLights, pointLightCount);
 		shaderList[0].SetSpotLights(spotLights, spotLightCount);
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
@@ -846,7 +836,7 @@ int main()
 			Tpasillo.UseTexture();
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			meshList[4]->RenderMesh();
-			spotLights[2].SetPos(glm::vec3(3.0f,2.5f,-5.2f));
+			//spotLights[2].SetPos(glm::vec3(3.0f,2.5f,-5.2f));
 			glDisable(GL_BLEND);
 
 			//poste2
@@ -858,8 +848,118 @@ int main()
 			Tpasillo.UseTexture();
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			meshList[4]->RenderMesh();
-			spotLights[4].SetPos(glm::vec3(3.0f, 2.5f, 5.2f));
+			//spotLights[4].SetPos(glm::vec3(3.0f, 2.5f, 5.2f));
 			glDisable(GL_BLEND);
+
+	//------ Personaje
+			model = glm::mat4(1.0);
+			if (camera.getCameraPosition().y > 2.0f) { model = glm::translate(model, glm::vec3(0.0, 1.3, 0.0)); }
+			else { model = glm::translate(model, glm::vec3(camera.getCameraPosition())); }
+			//model = glm::rotate(model, camera.getCameraDirection().x+180, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+			model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.8f, 1.0f, 1.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tnegro.UseTexture();
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//Cuerpo
+			//capa
+			model = glm::translate(model, glm::vec3(-0.6f, -0.2f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 1.4f, 1.5f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tnegro.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//capa 
+			//cinturon
+			model = glm::scale(model, glm::vec3(10.0f, 0.71f, 0.66f));
+			model = glm::translate(model, glm::vec3(0.6f, 0.2f, 0.0f));
+
+			model = glm::translate(model, glm::vec3(0.0f, -0.625f, 0.0f));
+			model = glm::scale(model, glm::vec3(1.0f, 0.25f, 1.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tamarillo.UseTexture();
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//Cintura
+
+			model = glm::translate(model, glm::vec3(0.0f, -2.5f, 0.25f));
+			model = glm::scale(model, glm::vec3(1.0f, 4.0f, 0.4f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			meshList[4]->RenderMesh();//pierna derecha
+			model = glm::translate(model, glm::vec3(0.0f, -0.625f, 0.0f));
+			model = glm::scale(model, glm::vec3(1.2f, 0.25f, 1.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tpasillo.UseTexture();
+			meshList[4]->RenderMesh();//Pie derecho
+
+			model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.25f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			meshList[4]->RenderMesh();//pie izquierdo
+			model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.8f, 4.0f, 1.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			meshList[4]->RenderMesh();//Pierna izquierdo
+
+			model = glm::mat4(1.0);
+			if (camera.getCameraPosition().y > 2.0f) { model = glm::translate(model, glm::vec3(0.0, 1.3, 0.0)); }
+			else { model = glm::translate(model, glm::vec3(camera.getCameraPosition())); }
+			model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+			model = glm::translate(model, glm::vec3(5.0f, -0.1f, -0.65f));
+			model = glm::scale(model, glm::vec3(0.5f, 1.2f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//brazo Izquierdo
+			model = glm::translate(model, glm::vec3(0.0f, -0.625f, 0.0f));
+			model = glm::scale(model, glm::vec3(1.2f, 0.25f, 1.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tpasillo.UseTexture();
+			meshList[4]->RenderMesh();//mano Izquierda
+			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 4.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tpasillo.UseTexture();
+			meshList[4]->RenderMesh();//mano derecha
+			model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.8f, 4.0f, 1.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			meshList[4]->RenderMesh();//brazo derecho
+
+			//Cabeza
+			model = glm::translate(model, glm::vec3(0.0f, 0.9f, -2.1f));
+			model = glm::scale(model, glm::vec3(1.0f, 0.7f, 3.2f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			meshList[4]->RenderMesh();//cabeza
+			model = glm::translate(model, glm::vec3(0.45f, 0.25f, -0.25f));
+			model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			plainTexture.UseTexture();
+			meshList[4]->RenderMesh();//ojo izquierdo
+			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 2.5f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			plainTexture.UseTexture();
+			meshList[4]->RenderMesh();//ojo derecho
+			model = glm::translate(model, glm::vec3(0.0f, -2.0f, -1.2f));
+			model = glm::scale(model, glm::vec3(1.0f, 1.3f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			plainTexture.UseTexture();
+			meshList[4]->RenderMesh();//boca
+			model = glm::translate(model, glm::vec3(-2.5f, 3.5f, 0.6f));
+			model = glm::scale(model, glm::vec3(2.0f, 1.0f, 0.5f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			meshList[1]->RenderMesh();//oreja izquierda
+			model = glm::translate(model, glm::vec3(2.5f, 0.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Tnegro.UseTexture();
+			meshList[1]->RenderMesh();//oreja derecha
+
+
 
 	//----- Edificios
 		//edificio1
@@ -2050,7 +2150,59 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		*/
+		mainLight = DirectionalLight(1.0f, 1.0f, 0.6f,
+			//1.0f, 1.0f,
+			getSunIntensity(segundos), getSunIntensity(segundos),
+			0.0f, 100.0f, -1.0f);
+		pointLights[0] = PointLight(1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			2.0f, 1.5f, 3.0f,
+			0.3f, 0.2f, 0.1f);
 
+		pointLights[1] = PointLight(1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			2.0f, 1.5f, -3.0f,
+			0.3f, 0.2f, 0.1f);
+
+		spotLights[0] = SpotLight(1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 0.0f * getPublicLightsStatus(),
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			12.0f, 5.0f, 1.5f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+
+		spotLights[1] = SpotLight(0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			12.0f, 5.0f, -1.5f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+		spotLights[2] = SpotLight(1.0f * getPublicLightsStatus(), 0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			15.0f, 5.0f, 1.5f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+
+		spotLights[3] = SpotLight(0.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 0.0f * getPublicLightsStatus(),
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			15.0f, 5.0f, -1.5f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+		spotLights[4] = SpotLight(1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 0.5f * getPublicLightsStatus(),
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			18.0f, 5.0f, 1.5f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+
+		spotLights[5] = SpotLight(0.5f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
+			18.0f, 5.0f, -1.5f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
 
 		endTime = glfwGetTime();
 		double resultado = endTime - startTime;
@@ -2062,23 +2214,7 @@ int main()
 			//Se vuelve a renderizar la luz del sol cada segundo
 			printf("\nIntensidad del sol: %.2f\n", getSunIntensity(segundos));
 			printf("Luces prendidas?: %d\n", getPublicLightsStatus());
-			mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
-				//1.0f, 1.0f,
-				getSunIntensity(segundos), getSunIntensity(segundos),
-				0.0f, 100.0f, -1.0f);
-			spotLights[2] = SpotLight(1.0f, 1.0f, 0.0f,
-				1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-				0.0f, 0.0f, 0.0f,
-				0.0f, -20.0f, 0.0f,
-				1.0f, 0.0f, 0.0f,
-				100.0f);
-			//luz de faro 2
-			spotLights[4] = SpotLight(0.0f, 0.0f, 1.0f,
-				1.0f * getPublicLightsStatus(), 1.0f * getPublicLightsStatus(),
-				0.0f, 0.0f, 0.0f,
-				0.0f, -20.0f, 0.0f,
-				1.0f, 0.0f, 0.0f,
-				100.0f);
+
 		}
 		glUseProgram(0);
 
@@ -2087,6 +2223,7 @@ int main()
 	}
 	//engine->drop(); // delete engine
 	return 0;
+	musica.Stop();
 }
 
 
@@ -2095,6 +2232,14 @@ void inputkey(bool* keys)
 {
 	if (keys[GLFW_KEY_SPACE]) {
 		play = true;
+	}
+	if (keys[GLFW_KEY_J])
+	{
+		camera = Camera(glm::vec3(positionP), glm::vec3(0.0f, 2.0f, 0.0f), 0.0f, 0.0f, 5.0f, 0.0f);
+	}
+	if (keys[GLFW_KEY_K])
+	{
+		camera = Camera(glm::vec3(0.0, 9.0, 0.0), glm::vec3(0.0f, 2.0f, 0.0f), 90.0f, 0.0f, 10.0f, 1.0f);
 	}
 }
 /*

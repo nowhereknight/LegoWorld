@@ -17,13 +17,14 @@ public:
 	GLfloat getmuevez() { return muevez; }
 	GLfloat getestadoLinterna() { return on_off; }
 	bool getShouldClose() {
-		return  glfwWindowShouldClose(mainWindow);}
+		return  glfwWindowShouldClose(mainWindow);
+	}
 	bool* getsKeys() { return keys; }
 	void swapBuffers() { return glfwSwapBuffers(mainWindow); }
-	
+
 	~Window();
-private: 
-	GLFWwindow *mainWindow;
+private:
+	GLFWwindow* mainWindow;
 	GLint width, height;
 	bool keys[1024];
 	GLint bufferWidth, bufferHeight;
@@ -40,4 +41,3 @@ private:
 	static void ManejaMouse(GLFWwindow* window, double xPos, double yPos);
 
 };
-

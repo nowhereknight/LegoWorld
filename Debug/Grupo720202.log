@@ -2,13 +2,12 @@
 C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.h(12,36): warning C4244:  'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.h(13,37): warning C4244:  'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.h(18,39): warning C4244:  'return': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(132,54): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(133,10): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(409,13): warning C4244:  '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(529,50): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(529,24): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(569,7): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(704,15): warning C4244:  'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(2067,47): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(2067,20): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(138,54): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(139,10): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(396,13): warning C4244:  '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(525,50): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(525,24): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(693,15): warning C4244:  'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(2155,46): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(2155,19): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   Grupo720202.vcxproj -> C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Debug\Grupo720202.exe

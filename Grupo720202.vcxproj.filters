@@ -71,6 +71,9 @@
     <ClInclude Include="Skybox.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Sonido.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -113,6 +116,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="practicakeyframes v3.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Sonido.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

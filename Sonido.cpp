@@ -17,12 +17,12 @@ void Sonido::Reproduce()
 			printf("\nError al cargar motor de audio.\n");
 
 		// play some sound stream, looped
-		engine->play2D("over-and-over.mp3", true);
+		engine->play2D("legoSong.mp3", true);
 		estado = true;
 	}
 }
 
-void Sonido::Deten()
+void Sonido::Stop()
 {
 	if (estado)
 	{

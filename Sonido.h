@@ -1,10 +1,16 @@
 #pragma once
-class Sonido{
+#include<irrKlang/irrKlang.h>
+using namespace irrklang;
+
+class Sonido
+{
 public:
-	bool estado;
+	Sonido();
+	void Reproduce();
+	void Stop();
+	~Sonido();
 
 private:
-
-
-
+	ISoundEngine* engine;
+	bool estado;
 };
