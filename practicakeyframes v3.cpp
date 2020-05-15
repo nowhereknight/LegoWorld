@@ -89,6 +89,12 @@ Texture Tverde;
 Texture TlegoGreen;
 Texture Ttransparente;
 Texture Tamarillo;
+Texture Tagua;
+//Texture Trojo;
+Texture Tarbol4;
+Texture Tblanco;
+Texture Tcolores2;
+Texture Tcolores3;
 
 
 //materiales
@@ -446,7 +452,7 @@ int main()
 
 	CreateShaders();
 	Sonido musica = Sonido();
-	//musica.Reproduce();
+	musica.Reproduce();
 	/*
 	ISoundEngine* engine = createIrrKlangDevice();
 
@@ -502,6 +508,17 @@ int main()
 	Ttransparente.LoadTextureA();
 	Tamarillo = Texture("Textures/proyecto/amarillo.jpg");
 	Tamarillo.LoadTextureA();
+	Tagua = Texture("Textures/proyecto/agua1.tga");
+	Tagua.LoadTextureA();
+	Tblanco = Texture("Textures/proyecto/blanco.jpg");
+	Tblanco.LoadTextureA();
+	Tarbol4 = Texture("Textures/proyecto/lego_arbolito3.tga");
+	Tarbol4.LoadTexture();
+	Tcolores2 = Texture("Textures/proyecto/colores2.jpeg");
+	Tcolores2.LoadTexture();
+	Tcolores3 = Texture("Textures/proyecto/colores3.jpeg");
+	Tcolores3.LoadTexture();
+
 
 
 
@@ -970,66 +987,261 @@ int main()
 
 
 
+/*
 	//----- Edificios
-		//edificio1
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 3.0f, -10.0f));
-		model = glm::scale(model, glm::vec3(2.0f,6.0f, 2.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		pisoTexture.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+		//edificio-1
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(10.0f, 1.0f, 10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
 
-		//edificio2
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 3.0f, 10.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 6.0f, 2.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		pisoTexture.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+			//edificio0
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(5.0f, 1.0f, -10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
 
-		//edificio3
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-5.0f, 3.0f, 10.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 6.0f, 2.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		pisoTexture.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+			//edificio1
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, -10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
 
-		//edificio4
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(5.0f, 3.0f, -10.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 6.0f, 2.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		pisoTexture.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+			//edificio2
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-5.0f, 1.0f, -10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
 
-		//edificio5
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, 3.0f, 10.0f));
-		model = glm::scale(model, glm::vec3(2.0f, 6.0f, 2.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		pisoTexture.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+			//edificio3
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-10.0f, 1.0f, -10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+
+			//edificio4
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-15.0f, 1.0f, -10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+
+			//edificio5
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-15.0f, 1.0f, 10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+
+			//edificio6
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-10.0f, 1.0f, 10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+
+			//edificio7
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-5.0f, 1.0f, 10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+
+			//edificio8
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores3.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+
+			//edificio9
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(5.0f, 1.0f, 10.0f));
+			model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte1
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte2
+			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glEnable(GL_BLEND);
+			Tcolores2.UseTexture();
+			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[4]->RenderMesh();//parte3
+			glDisable(GL_BLEND);
+		*/
 
 		//Baño caballeros
 		model = glm::mat4(1.0);
@@ -1055,812 +1267,940 @@ int main()
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
 
-	//---------Kiosko
-			//Escaleras
-		   glm::vec3 color = glm::vec3(1.0f, 0.0f, 0.0f);
-			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(10.0f, 0.1f, 0.0f));
-			model = glm::scale(model, glm::vec3(0.2f, 0.2f, 2.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			//glEnable(GL_BLEND);
-			Ttransparente.UseTexture();
+		//---------Kiosko
+				//Escaleras
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(10.0f, 0.1f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tpasillo.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//1er escalón
+		model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//2do escolón
+		model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//3er escalón
+		model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//4to escalón
+		model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//5to escalón
+		model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//6to escalón
+		model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//7mo escalón
+		glDisable(GL_BLEND);
 
-			color = glm::vec3(1.0f, 1.0f, 0.0f);
-			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			meshList[4]->RenderMesh();//1er escalón
-			color = glm::vec3(1.0f, 0.0f, 1.0f);
-			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//2do escolón
-			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//3er escalón
-			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//4to escalón
-			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//5to escalón
-			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//6to escalón
-			model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//7mo escalón
-			glDisable(GL_BLEND);
+		//base
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(11.75f, 0.8f, -1.75f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.6f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//cubo1
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo2
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo3
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo4
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo5
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo6
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo7
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo8
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo9
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo10
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo11
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo12
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//tercera fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo13
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo14
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo15
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo16
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo17
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo18
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo19
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo20
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo21
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//cuarta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo22
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo23
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo24
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo25
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo27
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo28
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo29
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo30
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo31
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo32
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo33
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//quita fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo34
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo35
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo36
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo37
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo38
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo39
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo40
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo41
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo42
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo43
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo44
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//sexta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//septima fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//octava fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//novena fila (ultima)
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		glDisable(GL_BLEND);
 
-			//base
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(11.75f, 0.8f, -1.75f));
-			model = glm::scale(model, glm::vec3(1.0f, 1.6f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			glEnable(GL_BLEND);
-			Tpasillo.UseTexture();
-			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			meshList[4]->RenderMesh();//cubo1
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo2
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo3
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo4
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo5
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo6
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo7
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo8
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo9
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo10
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo11
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo12
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//tercera fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo13
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo14
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo15
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo16
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo17
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo18
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo19
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo20
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo21
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//cuarta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo22
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo23
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo24
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo25
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo26
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo27
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo28
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo29
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo30
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo31
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo32
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo33
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//quita fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo34
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo35
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo36
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo37
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo38
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo39
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo40
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo41
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo42
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo43
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo44
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//sexta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo45
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo46
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo47
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo48
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//septima fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//octava fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//novena fila (ultima)
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-	   		glDisable(GL_BLEND);
+		//---Pilares
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(11.75f, 3.6f, -1.75f));
+		model = glm::scale(model, glm::vec3(0.5f, 4.0f, 0.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//pilar1
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//pilar2
+		model = glm::translate(model, glm::vec3(6.0f, 0.0f, 6.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//pilar3
+		model = glm::translate(model, glm::vec3(4.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//pilar4
+		model = glm::translate(model, glm::vec3(6.0f, 0.0f, -6.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//pilar5
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//pilar6
+		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -6.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tblanco.UseTexture();
+		meshList[4]->RenderMesh();//pilar7
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tazul.UseTexture();
+		meshList[4]->RenderMesh();//pilar8
 
-			//Pilares
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(11.75f, 3.6f, -1.75f)); 
-			model = glm::scale(model, glm::vec3(0.5f, 4.0f, 0.5f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			glEnable(GL_BLEND);
-			Tpasillo.UseTexture();
-			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			meshList[4]->RenderMesh();//pilar1
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 8.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar2
-			model = glm::translate(model, glm::vec3(6.0f, 0.0f, 6.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar3
-			model = glm::translate(model, glm::vec3(4.0f, 0.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar4
-			model = glm::translate(model, glm::vec3(6.0f, 0.0f, -6.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar5
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, -8.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar6
-			model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -6.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar7
-			model = glm::translate(model, glm::vec3(-4.0f, 0.0f, 0.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//pilar8
+	//Techo ******nivel1
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(11.75f, 6.0f, -1.75f));
+		model = glm::scale(model, glm::vec3(1.0f, 0.8f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tazul.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//cubo1
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo2
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo3
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo4
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo5
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo6
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo7
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo8
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo9
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo10
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo11
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo12
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//tercera fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo13
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo14
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo15
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo16
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo17
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo18
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo19
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo20
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo21
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//cuarta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo22
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo23
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo24
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo25
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo26
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo27
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo28
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo29
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo30
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo31
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo32
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo33
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//quita fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo34
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo35
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo36
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo37
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo38
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo39
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo40
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo41
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo42
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo43
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo44
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//sexta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo45
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo46
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo47
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo48
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//septima fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//octava fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//novena fila (ultima)
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		glDisable(GL_BLEND);
 
-			//Techo ******nivel1
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(11.75f, 6.0f, -1.75f));
-			model = glm::scale(model, glm::vec3(1.0f, 0.8f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			glEnable(GL_BLEND);
-			Tpasillo.UseTexture();
-			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			meshList[4]->RenderMesh();//cubo1
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo2
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo3
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo4
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo5
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo6
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo7
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo8
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo9
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo10
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo11
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo12
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//tercera fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo13
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo14
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo15
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo16
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo17
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo18
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo19
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo20
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo21
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//cuarta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo22
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo23
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo24
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo25
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo26
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo27
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo28
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo29
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo30
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo31
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo32
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo33
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//quita fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo34
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo35
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo36
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo37
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo38
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo39
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo40
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo41
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo42
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo43
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo44
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -10.0f));//sexta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo45
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo46
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo47
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo48
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -9.0f));//septima fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//octava fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//novena fila (ultima)
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			glDisable(GL_BLEND);
+		//Techo ******nivel2
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(12.75f, 6.8f, -1.75f));
+		model = glm::scale(model, glm::vec3(1.0f, 0.8f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//cubo1
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo2
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo3
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo4
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo5
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo6
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo7
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo8
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo9
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo10
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo11
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo12
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//tercera fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo22
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo23
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo24
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo25
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo26
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo27
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo28
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo29
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo30
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo31
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -8.0f));//cuarta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo34
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo35
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo36
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo37
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo38
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo39
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo40
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo41
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo42
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -8.0f));//sexta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo45
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo46
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo47
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo48
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//septima fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//octava fila(ultima)
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
 
-			//Techo ******nivel2
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(12.75f, 6.8f, -1.75f));
-			model = glm::scale(model, glm::vec3(1.0f, 0.8f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			glEnable(GL_BLEND);
-			Tpasillo.UseTexture();
-			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			meshList[4]->RenderMesh();//cubo1
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo2
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo3
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo4
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo5
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo6
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo7
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo8
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo9
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo10
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo11
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo12
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//tercera fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo22
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo23
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo24
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo25
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo26
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo27
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo28
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo29
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo30
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo31
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -8.0f));//cuarta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo34
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo35
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo36
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo37
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo38
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo39
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo40
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo41
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo42
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -8.0f));//sexta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo45
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo46
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo47
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo48
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -7.0f));//septima fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//octava fila(ultima)
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
+		//techo ---- nivel3
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.75f, 7.6f, -1.75f));
+		model = glm::scale(model, glm::vec3(1.0f, 0.8f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tazul.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//cubo1
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo2
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo3
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo4
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo5
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo6
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo7
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo8
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo9
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo10
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo11
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo12
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -6.0f));//tercera fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo22
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo23
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo24
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo25
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo26
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo27
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo28
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo29
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -6.0f));//cuarta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo45
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo46
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo47
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo48
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//septima fila(ultima)
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
 
-			//techo ---- nivel3
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(13.75f, 7.6f, -1.75f));
-			model = glm::scale(model, glm::vec3(1.0f, 0.8f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			glEnable(GL_BLEND);
-			Tpasillo.UseTexture();
-			Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			meshList[4]->RenderMesh();//cubo1
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo2
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo3
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo4
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo5
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//segunda fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo6
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo7
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo8
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo9
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo10
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo11
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo12
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -6.0f));//tercera fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo22
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo23
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo24
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo25
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo26
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo27
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo28
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo29
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -6.0f));//cuarta fila
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo45
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo46
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo47
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo48
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//septima fila(ultima)
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			meshList[4]->RenderMesh();//cubo
-			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-		
-	
-	//--------- bancas
-		//banca1
+		//---Barandales
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.0f, 3.0f, 3.9f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 4.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla1
+		model = glm::translate(model, glm::vec3(90.0f, 0.0f, -0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla4
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(15.7f, 3.0f, 5.3f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tazul.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla2
+		model = glm::translate(model, glm::vec3(102.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tazul.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla5
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(12.90f, 3.0f, -3.5f));
+		model = glm::rotate(model, -45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 3.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla6
+		model = glm::translate(model, glm::vec3(90.0f, 0.0f, 0.25f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tblanco.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla3
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(19.5f, 3.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 0.1f, 0.1f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tazul.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//barilla4
+
+
+//--------- bancas
+	//banca1
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-14.0f, 0.7f, 6.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 0.25f, 0.75f));
@@ -1961,15 +2301,374 @@ int main()
 		meshList[4]->RenderMesh();//pata2 de banca
 		glDisable(GL_BLEND);
 
-	//--------- botes de basura
-		//bote1 azul
+		//--- Fuente
+		//base
+		model = glm::mat4(1.0);
+		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::translate(model, glm::vec3(-5.0f, 0.5f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		Tcafe.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();//cubo1
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo2
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo3
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f));//segunda fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo4
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo5
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo6
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo7
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo8
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//tercera fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo9
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo10
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo11
+		model = glm::translate(model, glm::vec3(0.0f, 2.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 4.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo12
+		model = glm::scale(model, glm::vec3(1.0f, 0.25f, 1.0f));
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -6.0f));//cuarta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 2.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 4.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::scale(model, glm::vec3(1.0f, 0.25f, 1.0f));
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -5.0f));//quinta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f));//sexta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+
+		//orilla
+		model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));//primer fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));//segunda fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 4.0f));//
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 1.0f));//tercera fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -6.0f));//
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));//cuarta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 6.0f));//
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));//quinta fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -4.0f));//
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 1.0f));//primer fila
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tcafe.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tnaranja.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+
+		//Agua
+		model = glm::translate(model, glm::vec3(2.5f, -0.25f, 0.5f));
+		model = glm::scale(model, glm::vec3(2.0f, 0.5f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tagua.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tagua.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(0.75f, 0.0f, 0.75f));
+		model = glm::scale(model, glm::vec3(0.5f, 1.0f, 1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tagua.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+		model = glm::translate(model, glm::vec3(-3.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tagua.UseTexture();
+		meshList[4]->RenderMesh();//cubo
+
+
+
+
+	//--- Arboles
+		//Arbol1
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(5.0f, 2.5f, -6.0f));
+		model = glm::scale(model, glm::vec3(3.0f, 5.0f, 3.0f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol1.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		//Arbol2
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(5.0f, 2.5f, 6.0f));
+		model = glm::scale(model, glm::vec3(3.0f, 5.0f, 3.0f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol1.UseTexture(); //
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		//Arbol3
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-5.0f, 2.5f, -6.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 5.0f, 2.5f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol2.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		//Arbol4
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-5.0f, 2.5f, 6.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 5.0f, 2.5f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol2.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		//Arbol5
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-15.0f, 2.5f, 15.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 5.0f, 2.5f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol2.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		//Arbol6
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-15.0f, 3.0f, -15.0f));
+		model = glm::scale(model, glm::vec3(3.5f, 6.0f, 3.5f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol2.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+		/*
+		//Arbol7
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-15.0f, 3.0f, -9.0f));
+		model = glm::scale(model, glm::vec3(3.0f, 6.0f, 3.0f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol4.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+		
+		//Arbol8
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-13.0f, 3.0f, 9.0f));;
+		model = glm::scale(model, glm::vec3(3.0f, 6.0f, 3.0f));
+		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol4.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+		*/
+		//Arbolito-1
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-8.0f, 0.5f, -7.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol3.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		//Arbolito-2
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-9.0f, 0.5f, 8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//blending: transparencia o traslucidez
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Tarbol3.UseTexture(); // 
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[3]->RenderMesh();
+		glDisable(GL_BLEND);
+		
+
+		//--------- botes de basura
+	//bote1 azul
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-16.0f, 0.5f, -5.0f));
 		model = glm::scale(model, glm::vec3(0.5f, 1.0f, 0.5f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND); 
+		glEnable(GL_BLEND);
 		Tbasura.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
@@ -2014,151 +2713,6 @@ int main()
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
 
-	//--- Arboles
-		//Arbol1
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(5.0f, 2.0f, -6.0f));
-		model = glm::scale(model, glm::vec3(3.0f, 4.0f, 3.0f));
-		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tarbol1.UseTexture(); // 
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		//Arbol2
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(5.0f, 2.0f, 6.0f));
-		model = glm::scale(model, glm::vec3(3.0f, 4.0f, 3.0f));
-		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tarbol1.UseTexture(); //
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		//Arbol3
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-5.0f, 2.0f, -6.0f));
-		model = glm::scale(model, glm::vec3(2.5f, 4.0f, 2.5f));
-		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tarbol2.UseTexture(); // 
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		//Arbol4
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-5.0f, 2.0f, 6.0f));
-		model = glm::scale(model, glm::vec3(2.5f, 4.0f, 2.5f));
-		model = glm::rotate(model, rot * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tarbol2.UseTexture(); // 
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		//Arbol5
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-8.0f, 0.5f, -7.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tarbol3.UseTexture(); // 
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		//Arbol6
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-9.0f, 0.5f, 8.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tarbol3.UseTexture(); // 
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-
-		//Agave ¿qué sucede si lo renderizan antes del coche y de la pista?
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-2.0f, 0.5f, -6.0f));
-		model = glm::scale(model, glm::vec3(0.5f, 1.0f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tagave.UseTexture(); // el agave bonito con transparencia
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		//Agave2
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-2.0f, 0.5f, 6.0f));
-		model = glm::scale(model, glm::vec3(0.5f, 1.0f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//blending: transparencia o traslucidez
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Tagave.UseTexture(); // el agave bonito con transparencia
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[3]->RenderMesh();
-		glDisable(GL_BLEND);
-
-
-		//Para cargar al perrito
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-7.0f+movPerro, 0.3f, 0.0f)); //Tralasion 
-		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));//Escala 
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f)); //Rotacion
-		//model = glm::rotate(model, 270 * toRadians, glm::vec3(0.0f, 0.0f, 1.0f)); //Rotacion
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Ping_M.RenderModel(); //carga del perro
-		
-
-		//Agave
-
-	/*
-		//Avion
-		model = glm::mat4(1.0);
-		posblackhawk = glm::vec3(posXavion+movAvion_x,posYavion+movAvion_y, posZavion);
-		model = glm::translate(model, posblackhawk);
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		
-		model = glm::rotate(model, giroAvion * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		
-		//Cambio
-		model = glm::rotate(model, -90* toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Blackhawk_M.RenderModel();
-		//spotLights[3].SetPos(posblackhawk);
-		
-
-	/*	model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		*/
 		mainLight = DirectionalLight(1.0f, 1.0f, 0.6f,
 			//1.0f, 1.0f,
 			getSunIntensity(segundos), getSunIntensity(segundos),
@@ -2243,7 +2797,7 @@ int main()
 void inputkey(bool* keys) 
 {
 	if (keys[GLFW_KEY_SPACE]) {
-		play = true;
+		play = !play;
 	}
 	if (keys[GLFW_KEY_J])
 	{
