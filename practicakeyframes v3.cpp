@@ -93,8 +93,9 @@ Texture Tagua;
 //Texture Trojo;
 Texture Tarbol4;
 Texture Tblanco;
-Texture Tcolores2;
+Texture Tcolores;
 Texture Tcolores3;
+Texture Tvidrio;
 
 
 //materiales
@@ -113,6 +114,7 @@ Model Llanta_M;
 Model Camino_M;
 Model Blackhawk_M;//helicoptero
 Model Ping_M; //Pinguino
+Model wc_M;
 
 Skybox skybox;
 
@@ -452,7 +454,7 @@ int main()
 
 	CreateShaders();
 	Sonido musica = Sonido();
-	musica.Reproduce();
+	//musica.Reproduce();
 	/*
 	ISoundEngine* engine = createIrrKlangDevice();
 
@@ -514,10 +516,13 @@ int main()
 	Tblanco.LoadTextureA();
 	Tarbol4 = Texture("Textures/proyecto/lego_arbolito3.tga");
 	Tarbol4.LoadTexture();
-	Tcolores2 = Texture("Textures/proyecto/colores2.jpeg");
-	Tcolores2.LoadTexture();
+	Tcolores = Texture("Textures/proyecto/colores2.jpeg");
+	Tcolores.LoadTexture();
 	Tcolores3 = Texture("Textures/proyecto/colores3.jpeg");
 	Tcolores3.LoadTexture();
+	Tvidrio = Texture("Textures/proyecto/vidrio.tga");
+	Tvidrio.LoadTextureA();
+
 
 
 
@@ -538,6 +543,8 @@ int main()
 	Ping_M.LoadModel("Models/WOLF.obj");
 	Camino_M = Model();
 	Camino_M.LoadModel("Models/railroad track.obj");
+	wc_M = Model();
+	wc_M.LoadModel("Models/unitaz.obj");
 
 
 	bool isDay = false;
@@ -1243,29 +1250,284 @@ int main()
 			glDisable(GL_BLEND);
 		*/
 
-		//Baño caballeros
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(10.0f, 2.0f, -15.0f));
-		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		Tnaranja.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+		////Baño caballeros
+		//model = glm::mat4(1.0);
+		//model = glm::translate(model, glm::vec3(10.0f, 2.0f, -15.0f));
+		//model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//glEnable(GL_BLEND);
+		//Tnaranja.UseTexture();
+		//Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		//meshList[4]->RenderMesh();
+		//glDisable(GL_BLEND);
 
-		//Baño damas
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(15.0f, 2.0f, -15.0f));
-		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glEnable(GL_BLEND);
-		Trosa.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-		glDisable(GL_BLEND);
+		////Baño damas
+		//model = glm::mat4(1.0);
+		//model = glm::translate(model, glm::vec3(15.0f, 2.0f, -15.0f));
+		//model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//glEnable(GL_BLEND);
+		//Trosa.UseTexture();
+		//Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		//meshList[4]->RenderMesh();
+		//glDisable(GL_BLEND);
+
+//---Baño caballeros
+model = glm::mat4(1.0);
+model = glm::translate(model, glm::vec3(5.0f, 0.1f, -15.0f));
+model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+model = glm::translate(model, glm::vec3(0.0f, 2.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.1f, 4.0f, 7.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+glEnable(GL_BLEND);
+pisoTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared derecha
+model = glm::translate(model, glm::vec3(60.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared izquierda
+model = glm::scale(model, glm::vec3(10.0f, 0.25f, 0.14f));//1.0 1.0 1.0
+model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.5f));
+model = glm::scale(model, glm::vec3(6.0f, 4.0f, 0.1f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared trasera
+//----lavamanos
+model = glm::scale(model, glm::vec3(0.16f, 0.25f, 10.0f));//1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(2.55f, -0.5f, 2.0f));
+model = glm::scale(model, glm::vec3(1.0f, 0.25f, 4.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+plainTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//base
+model = glm::translate(model, glm::vec3(-0.4f, 1.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.2f, 1.0f, 1.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+plainTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//costado
+model = glm::scale(model, glm::vec3(5.0f, 4.0f, 0.25f));//1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.8f, 0.25f, 4.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+Tagua.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//agua
+glDisable(GL_BLEND);
+model = glm::scale(model, glm::vec3(1.25f, 4.0f, 0.25f));//1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(-0.1f, -0.125f, 2.0f));
+model = glm::scale(model, glm::vec3(1.0f, 0.5f, 0.1f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+plainTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//frente
+//--- baños
+model = glm::scale(model, glm::vec3(1.0f, 2.0f, 10.0f));//1.0,1.0,1.0
+model = glm::scale(model, glm::vec3(2.5f, 2.5f, 3.0f));// 
+model = glm::translate(model, glm::vec3(-2.1f, -0.25f, -1.0f));
+model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f)); //Rotacion
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+wc_M.RenderModel(); //wc1
+model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+wc_M.RenderModel(); //wc2
+//--paredes y puertas
+model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.33f));// 1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(1.45f, 0.5f, 1.0f));
+model = glm::scale(model, glm::vec3(0.2f, 3.0f, 3.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tazul.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared 1
+glDisable(GL_BLEND);
+model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tazul.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared 2
+
+model = glm::scale(model, glm::vec3(5.0f, 0.33f, 0.33f));///1,1,1
+model = glm::translate(model, glm::vec3(1.0f, 0.45f, 1.5f));
+model = glm::scale(model, glm::vec3(1.8f, 2.0f, 0.25f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//puerta 2
+model = glm::translate(model, glm::vec3(1.1f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//puerta 1
+glDisable(GL_BLEND);
+
+model = glm::scale(model, glm::vec3(0.55f, 0.5f, 4.0f));///1,1,1
+model = glm::translate(model, glm::vec3(0.75f, 0.0f, -0.5f));
+model = glm::scale(model, glm::vec3(0.25f, 1.0f, 1.0f));//--
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tnegro.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//para papel
+model = glm::translate(model, glm::vec3(-8.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tnegro.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//para papel
+
+model = glm::scale(model, glm::vec3(4.0f, 1.0f, 1.0f));///1,1,1
+model = glm::translate(model, glm::vec3(-3.75f, 0.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.1f, 4.0f, 5.0f));//--
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tazul.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared frente
+model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.75f));
+model = glm::scale(model, glm::vec3(1.0f, 1.0f, 0.5f));//--
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+Tvidrio.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//puerta
+glDisable(GL_BLEND);
+glDisable(GL_BLEND);
+
+
+//-----Baño damas
+model = glm::mat4(1.0);
+model = glm::translate(model, glm::vec3(10.0f, 0.1f, -15.0f));
+model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+model = glm::translate(model, glm::vec3(0.0f, 2.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.1f, 4.0f, 7.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+glEnable(GL_BLEND);
+pisoTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared derecha
+model = glm::translate(model, glm::vec3(60.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared izquierda
+model = glm::scale(model, glm::vec3(10.0f, 0.25f, 0.14f));//1.0 1.0 1.0
+model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.5f));
+model = glm::scale(model, glm::vec3(6.0f, 4.0f, 0.1f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared trasera
+//----lavamanos
+model = glm::scale(model, glm::vec3(0.16f, 0.25f, 10.0f));//1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(2.55f, -0.5f, 2.0f));
+model = glm::scale(model, glm::vec3(1.0f, 0.25f, 4.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+plainTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//base
+model = glm::translate(model, glm::vec3(-0.4f, 1.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.2f, 1.0f, 1.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+plainTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//costado
+model = glm::scale(model, glm::vec3(5.0f, 4.0f, 0.25f));//1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.8f, 0.25f, 4.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+Tagua.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//agua
+glDisable(GL_BLEND);
+model = glm::scale(model, glm::vec3(1.25f, 4.0f, 0.25f));//1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(-0.1f, -0.125f, 2.0f));
+model = glm::scale(model, glm::vec3(1.0f, 0.5f, 0.1f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+plainTexture.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//frente
+
+model = glm::scale(model, glm::vec3(1.0f, 2.0f, 10.0f));//1.0,1.0,1.0
+model = glm::scale(model, glm::vec3(2.5f, 2.5f, 3.0f));// 
+model = glm::translate(model, glm::vec3(-2.1f, -0.25f, -1.0f));
+model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f)); //Rotacion
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+wc_M.RenderModel(); //wc
+
+model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+wc_M.RenderModel(); //wc2
+//--puerta
+model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.33f));// 1.0,1.0,1.0
+model = glm::translate(model, glm::vec3(1.45f, 0.5f, 1.0f));
+model = glm::scale(model, glm::vec3(0.2f, 3.0f, 3.0f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tazul.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared 1
+glDisable(GL_BLEND);
+model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tazul.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared 2
+model = glm::scale(model, glm::vec3(5.0f, 0.33f, 0.33f));///1,1,1
+model = glm::translate(model, glm::vec3(1.0f, 0.45f, 1.5f));
+model = glm::scale(model, glm::vec3(1.8f, 2.0f, 0.25f));//-
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//puerta 2
+model = glm::translate(model, glm::vec3(1.1f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tblanco.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//puerta 1
+glDisable(GL_BLEND);
+
+model = glm::scale(model, glm::vec3(0.55f, 0.5f, 4.0f));///1,1,1
+model = glm::translate(model, glm::vec3(0.75f, 0.0f, -0.5f));
+model = glm::scale(model, glm::vec3(0.25f, 1.0f, 1.0f));//--
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tnegro.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//para papel
+model = glm::translate(model, glm::vec3(-8.0f, 0.0f, 0.0f));
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tnegro.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//para papel
+
+model = glm::scale(model, glm::vec3(4.0f, 1.0f, 1.0f));///1,1,1
+model = glm::translate(model, glm::vec3(-3.75f, 0.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.1f, 4.0f, 5.0f));//--
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+Tamarillo.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//pared frente
+model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.75f));
+model = glm::scale(model, glm::vec3(1.0f, 1.0f, 0.5f));//--
+glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+Tvidrio.UseTexture();
+Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+meshList[4]->RenderMesh();//puerta
+glDisable(GL_BLEND);
+glDisable(GL_BLEND);
+
+
 
 		//---------Kiosko
 				//Escaleras
@@ -2712,6 +2974,16 @@ int main()
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 		glDisable(GL_BLEND);
+
+		//Para cargar al perrito
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-3.5 + movPerro, 0.3f, -3.5f)); //Tralasion 
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));//Escala 
+		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f)); //Rotacion
+		//model = glm::rotate(model, 270 * toRadians, glm::vec3(0.0f, 0.0f, 1.0f)); //Rotacion
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Ping_M.RenderModel(); //carga del perro
 
 		mainLight = DirectionalLight(1.0f, 1.0f, 0.6f,
 			//1.0f, 1.0f,

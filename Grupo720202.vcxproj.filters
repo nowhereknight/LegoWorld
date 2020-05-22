@@ -115,10 +115,10 @@
     <ClCompile Include="Skybox.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="practicakeyframes v3.cpp">
+    <ClCompile Include="Sonido.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Sonido.cpp">
+    <ClCompile Include="practicakeyframes v3.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

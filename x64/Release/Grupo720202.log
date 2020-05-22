@@ -1,0 +1,41 @@
+﻿  Camera.cpp
+  DirectionalLight.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Camera.h(5,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  Light.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Light.h(4,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  Material.cpp
+  Mesh_tn.cpp
+  Model.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Light.h(4,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(15,10): warning C4477:  'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'const std::string'
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(15,80): warning C4474:  "printf": se pasaron demasiados argumentos para la cadena de formato
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(15,80): message :  los marcadores de posición y sus parámetros esperan 1 argumentos variádicos, pero se proporcionaron 2
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(50,6): warning C4804:  '<': uso no seguro del tipo 'bool' en la operación
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(108,80): warning C4267:  'argumento': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(125,49): warning C4267:  'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(137,14): warning C4477:  'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'std::string'
+  PointLight.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Model.cpp(146,14): warning C4477:  'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'std::string'
+  practicakeyframes v3.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Light.h(4,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  Shader_light.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\practicakeyframes v3.cpp(17,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  Skybox.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Light.h(4,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  Sonido.cpp
+  Sphere.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Skybox.h(7,9): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  SpotLight.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\definition.h(11,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+  Texture.cpp
+  Window.cpp
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Light.h(4,10): error C1083:  No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.h(12,36): warning C4244:  'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.h(13,37): warning C4244:  'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.h(18,39): warning C4244:  'return': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.cpp(157,22): warning C4244:  '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.cpp(158,22): warning C4244:  '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.cpp(162,28): warning C4244:  '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.cpp(163,40): warning C4244:  '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.cpp(165,21): warning C4244:  '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\zurie\Documents\Ingenieria\Octavo Semestre\CGeIHC\ProyectoFinal\RICHIGG\Grupo720202\Window.cpp(166,21): warning C4244:  '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
